@@ -232,15 +232,6 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Customize Flow 的本地化字符串。
-        /// </summary>
-        public static string customizeflow {
-            get {
-                return ResourceManager.GetString("customizeflow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Customize HTTP Header 的本地化字符串。
         /// </summary>
         public static string customizehttpheader {
@@ -336,15 +327,6 @@ namespace V2RayW.Resources {
         public static string exportbackup {
             get {
                 return ResourceManager.GetString("exportbackup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 https://www.v2fly.org/config/protocols/vless.html#xtls-%E9%BB%91%E7%A7%91%E6%8A%80 的本地化字符串。
-        /// </summary>
-        public static string flowHelpPage {
-            get {
-                return ResourceManager.GetString("flowHelpPage", resourceCulture);
             }
         }
         

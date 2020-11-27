@@ -16,12 +16,6 @@
                     <TextBox Padding="4" IsEnabled="{Binding ElementName=encryptionCheckBox, Path=IsChecked}" x:Name="encryptionContentBox" HorizontalAlignment="Left" Height="124" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" FontFamily="Lucida Console" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Flow">
-                <Grid Background="#FFE5E5E5">
-                    <CheckBox x:Name="flowCheckBox" Content="{x:Static res:Strings.customizeflow}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <TextBox Padding="4" IsEnabled="{Binding ElementName=flowCheckBox, Path=IsChecked}" x:Name="flowContentBox" HorizontalAlignment="Left" Height="124" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" FontFamily="Lucida Console" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-                </Grid>
-            </TabItem>
         </TabControl>
 
         <Button x:Name="helpButton" Click="HelpButton_Click" Content="{x:Static res:Strings.help}" HorizontalAlignment="Left" Margin="14,220,0,0" VerticalAlignment="Top" Width="75"/>

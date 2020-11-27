@@ -370,13 +370,6 @@ namespace V2RayW
                     selectedUserInfo["alterId"] = int.Parse(alterIdBox.Text);
                     selectedUserInfo["security"]= selectedUserInfo.ContainsKey("security") ? selectedUserInfo["security"].ToString() : "auto";
                     selectedUserInfo.Remove("encryption");
-                    selectedUserInfo.Remove("flow");
-                    if (streamSettings["security"] as string == "xtls")
-                    {
-                        streamSettings["security"] = "tls";
-                        streamSettings.Remove("tlsSettings");
-                        profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
-                    }
                 }
                 if (selectedProfile["protocol"] as string == "vless")
                 {
@@ -386,7 +379,6 @@ namespace V2RayW
                     securityComboBox.IsEnabled = false;
                     enhancedButton.IsEnabled = true; 
                     selectedUserInfo["encryption"] = selectedUserInfo.ContainsKey("encryption") ? selectedUserInfo["encryption"].ToString() : "none";
-                    selectedUserInfo["flow"] = selectedUserInfo.ContainsKey("flow") ? selectedUserInfo["flow"].ToString() : "";
                     selectedUserInfo.Remove("alterId");
                     selectedUserInfo.Remove("security");
                 }

@@ -107,12 +107,8 @@ namespace V2RayW
             #endregion
 
             #region tls
-            tlsEnableBox.IsChecked = streamSettings["security"] as string == "tls" || streamSettings["security"] as string == "xtls";
+            tlsEnableBox.IsChecked = streamSettings["security"] as string == "tls";
             Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
-            if (streamSettings["security"] as string == "xtls")
-            {
-                tlsSettings = streamSettings["xtlsSettings"] as Dictionary<string, object>;
-            }
             tlsAlpnBox.Text = String.Join(",", tlsSettings["alpn"] as object[]);
             tlsServerBox.Text = tlsSettings["serverName"] as string;
             tlsInsecureBox.IsChecked = (bool)tlsSettings["allowInsecure"];
@@ -223,21 +219,13 @@ namespace V2RayW
                 {"security", quicSecurityBox.SelectedItem.ToString() },
                 {"header", new Dictionary<string, object>{ { "type", quicHeaderBox.SelectedItem.ToString() } } }
             };
-            streamSettings["security"] = tlsEnableBox.IsChecked ?? false ? streamSettings["security"].ToString() : "none";
-            Dictionary<string, object> tlsxtlsSettings = new Dictionary<string, object> {
+            streamSettings["security"] = tlsEnableBox.IsChecked ?? false ? "tls" : "none";
+            streamSettings["tlsSettings"] = new Dictionary<string, object> {
                 { "allowInsecure", tlsInsecureBox.IsChecked ?? false },
                 { "alpn", tlsAlpnBox.Text.Split(',') },
                 { "serverName", tlsServerBox.Text.Trim() },
                 { "allowInsecureCiphers", tlsInsecureCipherBox.IsChecked ?? false }
             };
-            if (streamSettings["security"] as string == "tls")
-            {
-                streamSettings["tlsSettings"] = tlsxtlsSettings;
-            }
-            if(streamSettings["security"] as string == "xtls")
-            {
-                streamSettings["xtlsSettings"] = tlsxtlsSettings;
-            }
             this.Close();
         }
 
