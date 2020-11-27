@@ -378,32 +378,12 @@
   <data name="configInstruction" xml:space="preserve">
     <value>To fully take control of the V2Ray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe.</value>
   </data>
-  <data name="coreHelppage" xml:space="preserve">
-    <value>https://www.v2ray.com/en/welcome/install.html</value>
-  </data>
   <data name="messagecorequit" xml:space="preserve">
     <value>V2Ray exits unexpectedly!</value>
   </data>
-  <data name="messagedircreatefail" xml:space="preserve">
-    <value>Cannot create folder(s)!</value>
-  </data>
-  <data name="messagedownloadfail" xml:space="preserve">
-    <value>V2RayW cannot download V2Ray core!</value>
-  </data>
-  <data name="messagedownloading" xml:space="preserve">
-    <value>V2RayW is downloading V2Ray core from GitHub.</value>
-  </data>
-  <data name="messagedownloadsuccess" xml:space="preserve">
-    <value>V2RayW got V2Ray core from GitHub.</value>
-  </data>
-  <data name="messagefilecreatefail" xml:space="preserve">
-    <value>Cannot create file(s)!</value>
-  </data>
   <data name="messagenocore" xml:space="preserve">
-    <value>Let V2RayW doanload V2Ray from GitHub?
-“Yes”：V2RayW will try downloading V2Ray from GitHub。
-“No”：Manually download V2Ray and put files into folder v2ray-core.
-“Cancel”：Quit V2RayW。
+    <value>“OK”：V2RayW will open the V2Ray project home page.
+“Cancel”：Quit V2RayW, Manually download V2Ray and put files into folder v2ray-core。
 
 Folder v2ray-core should be put in the same folder as V2RayW.exe. The following files should be contained in v2ray-core:
 v2ray-core\v2ray.exe
@@ -521,5 +501,17 @@ v2ray-core\geosite.dat</value>
   </data>
   <data name="usepart" xml:space="preserve">
     <value>Use Part</value>
+  </data>
+  <data name="coreHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/en/welcome/install.html</value>
+  </data>
+  <data name="coreUrl" xml:space="preserve">
+    <value>https://github.com/v2fly/v2ray-core</value>
+  </data>
+  <data name="messagedircreatefail" xml:space="preserve">
+    <value>Cannot create folder(s)!</value>
+  </data>
+  <data name="messagefilecreatefail" xml:space="preserve">
+    <value>Cannot create file(s)!</value>
   </data>
 </root>

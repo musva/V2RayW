@@ -47,8 +47,8 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         public static global::System.Globalization.CultureInfo Culture {
@@ -210,6 +210,15 @@ namespace V2RayW.Resources {
         public static string coreunloaded {
             get {
                 return ResourceManager.GetString("coreunloaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://github.com/v2fly/v2ray-core 的本地化字符串。
+        /// </summary>
+        public static string coreUrl {
+            get {
+                return ResourceManager.GetString("coreUrl", resourceCulture);
             }
         }
         
@@ -511,33 +520,6 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 V2RayW cannot download V2Ray core! 的本地化字符串。
-        /// </summary>
-        public static string messagedownloadfail {
-            get {
-                return ResourceManager.GetString("messagedownloadfail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 V2RayW is downloading V2Ray core from GitHub. 的本地化字符串。
-        /// </summary>
-        public static string messagedownloading {
-            get {
-                return ResourceManager.GetString("messagedownloading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 V2RayW got V2Ray core from GitHub. 的本地化字符串。
-        /// </summary>
-        public static string messagedownloadsuccess {
-            get {
-                return ResourceManager.GetString("messagedownloadsuccess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Cannot create file(s)! 的本地化字符串。
         /// </summary>
         public static string messagefilecreatefail {
@@ -556,10 +538,8 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Let V2RayW doanload V2Ray from GitHub?
-        ///“Yes”：V2RayW will try downloading V2Ray from GitHub。
-        ///“No”：Manually download V2Ray and put files into folder v2ray-core.
-        ///“Cancel”：Quit V2RayW。
+        ///   查找类似 “OK”：V2RayW will open the V2Ray project home page.
+        ///“Cancel”：Quit V2RayW, Manually download V2Ray and put files into folder v2ray-core。
         ///
         ///Folder v2ray-core should be put in the same folder as V2RayW.exe. The following files should be contained in v2ray-core:
         ///v2ray-core\v2ray.exe

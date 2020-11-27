@@ -155,45 +155,6 @@ namespace V2RayW
             return true;
         }
 
-        BackgroundWorker coreDownloader;
-
-        private void CoreDownloader_DoWork(object sender, DoWorkEventArgs e)
-        {
-            try
-            {
-                DownloadCore();
-                Dispatcher.Invoke(() =>
-                {
-                    notifyIcon.ShowBalloonTip("", Strings.messagedownloadsuccess, BalloonIcon.Info);
-                    (mainMenu.Items[1] as MenuItem).IsEnabled = true;
-                });
-            }
-            catch
-            {
-                Dispatcher.Invoke(() =>
-                {
-                    MessageBox.Show(Strings.messagefilecreatefail);
-                    Application.Current.Shutdown();
-                });
-            }
-        }
-
-        void DownloadCore()
-        {
-            string coreDirectory = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\";
-            if (Directory.Exists(coreDirectory))
-            {
-                Directory.Delete(coreDirectory, true);
-                Debug.WriteLine("core dir is deleted");
-            }
-            string downloadLink = $"https://raw.githubusercontent.com/v2ray/dist/master/v2ray-windows-{(Environment.Is64BitOperatingSystem ? "64" : "32")}.zip";
-            WebClient client = new WebClient();
-            client.DownloadFile(downloadLink, AppDomain.CurrentDomain.BaseDirectory + "v2ray.zip");
-            Debug.WriteLine("core downloaded");
-            ZipArchive archive = ZipFile.OpenRead(AppDomain.CurrentDomain.BaseDirectory + "v2ray.zip");
-            archive.ExtractToDirectory(AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\");
-            Debug.WriteLine("core is extraced");
-        }
 
         private bool CheckFiles()
         {
@@ -224,7 +185,7 @@ namespace V2RayW
 
             bool findMissingFile = false;
             string coreDirectory = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\";
-            foreach (string file in Utilities.necessaryFiles)
+            foreach (var file in Utilities.necessaryFiles)
             {
                 if (!File.Exists(coreDirectory + file))
                 {
@@ -234,21 +195,17 @@ namespace V2RayW
             }
             if (findMissingFile)
             {
-                var result = MessageBox.Show(Strings.messagenocore, Strings.messagenocoretitle, MessageBoxButton.YesNoCancel);
+                var result = MessageBox.Show(Strings.messagenocore, Strings.messagenocoretitle, MessageBoxButton.OKCancel);
                 switch (result)
                 {
-                    case MessageBoxResult.Yes:
+                    case MessageBoxResult.OK:
                         {
                             proxyState = false;
-                            notifyIcon.ShowBalloonTip("", Strings.messagedownloading, BalloonIcon.Info);
-                            coreDownloader = new BackgroundWorker();
-                            coreDownloader.DoWork += CoreDownloader_DoWork;
-                            coreDownloader.RunWorkerAsync();
+                            Process.Start(Strings.coreUrl);
                             return true;
                         }
-                    case MessageBoxResult.No:
+                    case MessageBoxResult.Cancel:
                         {
-                            Process.Start(Strings.coreHelppage);
                             return false;
                         }
                     default:

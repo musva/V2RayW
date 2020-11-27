@@ -378,32 +378,12 @@
   <data name="configInstruction" xml:space="preserve">
     <value>若需完全自定义 V2Ray 的功能，则将完整的配置文件放在 config 文件夹内。config 文件夹和 V2RayW.exe 在同一个文件夹内。</value>
   </data>
-  <data name="coreHelppage" xml:space="preserve">
-    <value>https://www.v2ray.com/chapter_00/install.html</value>
-  </data>
   <data name="messagecorequit" xml:space="preserve">
     <value>V2Ray 意外退出！</value>
   </data>
-  <data name="messagedircreatefail" xml:space="preserve">
-    <value>无法创建文件夹！</value>
-  </data>
-  <data name="messagedownloadfail" xml:space="preserve">
-    <value>V2RayW 下载 V2Ray 失败！</value>
-  </data>
-  <data name="messagedownloading" xml:space="preserve">
-    <value>V2RayW 正在从 GitHub 下载 V2Ray。</value>
-  </data>
-  <data name="messagedownloadsuccess" xml:space="preserve">
-    <value>V2RayW 下载 V2Ray 成功！</value>
-  </data>
-  <data name="messagefilecreatefail" xml:space="preserve">
-    <value>无法创建文件！</value>
-  </data>
   <data name="messagenocore" xml:space="preserve">
-    <value>是否让 V2RayW 自动下载 V2Ray?
-“是”：V2RayW 将尝试从 GitHub 下载 V2Ray。
-“否”：自行下载 V2Ray 并把相关文件放到 v2ray-core 文件夹内。
-“取消”：退出 V2RayW。
+    <value>“确定”：V2RayW 将打开V2Ray项目主页。
+“取消”：退出 V2RayW，自行下载 V2Ray 并把相关文件放到 v2ray-core 文件夹内。
 
 v2ray-core 文件夹与 V2RayW.exe 放在同一文件夹下，v2ray-core 文件夹需包含：
 v2ray-core\v2ray.exe
@@ -521,5 +501,17 @@ v2ray-core\geosite.dat</value>
   </data>
   <data name="usepart" xml:space="preserve">
     <value>使用部分</value>
+  </data>
+  <data name="coreHelppage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_00/install.html</value>
+  </data>
+  <data name="coreUrl" xml:space="preserve">
+    <value>https://github.com/v2fly/v2ray-core</value>
+  </data>
+  <data name="messagedircreatefail" xml:space="preserve">
+    <value>无法创建文件夹！</value>
+  </data>
+  <data name="messagefilecreatefail" xml:space="preserve">
+    <value>无法创建文件！</value>
   </data>
 </root>

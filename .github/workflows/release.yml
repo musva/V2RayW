@@ -20,7 +20,7 @@ jobs:
 
 
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@2008f912f56e61277eefaac6d1888b750582aa16
+      uses: microsoft/setup-msbuild@v1.0.2
 
     - name: Setup NuGet
       uses: nuget/setup-nuget@v1
@@ -44,9 +44,9 @@ jobs:
       uses: "marvinpinto/action-automatic-releases@latest"
       with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "v2.3.0"
+          automatic_release_tag: "v2.3.1"
           prerelease: false
-          title: "v2.3.0"
+          title: "v2.3.1"
           files:  |
             V2RayW.zip
      
