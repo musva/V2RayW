@@ -8,16 +8,15 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         x:Name="configWindow"
-        Title="{x:Static res:Strings.configWindowName}" Height="508" Width="525" WindowStartupLocation="CenterScreen">
+        Title="{x:Static res:Strings.configWindowName}" Height="460" Width="515" WindowStartupLocation="CenterScreen">
 
     <Grid>
-
+        <Separator Margin="0,103,0,317.5" Opacity="0.1"></Separator>
         <Label Content="{x:Static res:Strings.LocalSocks5Port}" HorizontalContentAlignment="Right"  HorizontalAlignment="Left" Margin="21,10,0,0" VerticalAlignment="Top" Height="26" Width="104"/>
         <Label Content="{x:Static res:Strings.LocalHTTPPort}" HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="29,41,0,0" VerticalAlignment="Top" Height="26" Width="96"/>
-        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="localPortBox" HorizontalAlignment="Left" Height="23" Margin="133,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.188,-0.13" VerticalContentAlignment="Center"/>
-        <TextBox  PreviewTextInput="NumberValidationTextBox" x:Name="httpPortBox" HorizontalAlignment="Left" Height="23" Margin="133,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Center" RenderTransformOrigin="0.312,-0.348"/>
-        <ListBox x:Name="vmessListBox" HorizontalAlignment="Left" Height="173" Margin="18,188,0,0" VerticalAlignment="Top" Width="107" SelectionMode="Single"
-                 >
+        <TextBox PreviewTextInput="NumberValidationTextBox" x:Name="localPortBox" HorizontalAlignment="Left" Height="23" Margin="133,11,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.188,-0.13" VerticalContentAlignment="Center" ToolTip="{x:Static res:Strings.DNSInstruction}"/>
+        <TextBox  PreviewTextInput="NumberValidationTextBox" x:Name="httpPortBox" HorizontalAlignment="Left" Height="23" Margin="133,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Center" RenderTransformOrigin="0.312,-0.348" ToolTip="{x:Static res:Strings.DNSInstruction}"/>
+        <ListBox x:Name="vmessListBox" HorizontalAlignment="Left" Height="173" Margin="18,139,0,0" VerticalAlignment="Top" Width="107" SelectionMode="Single">
             <ListBox.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{x:Static res:Strings.Clone}" Click="CloneMenuItem_Click"></MenuItem>
@@ -25,18 +24,16 @@
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>
-        <Button Content="{x:Static res:Strings.cancel}" HorizontalAlignment="Left" Margin="327,439,0,0" VerticalAlignment="Top" Width="76" Click="HideWindow"/>
-        <Button x:Name="saveConfigButton" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="421,439,0,0" VerticalAlignment="Top" Width="74" Click="HideWindow"/>
-        <Button Content="{x:Static res:Strings.advanced}" HorizontalAlignment="Left" Margin="395,401,0,0" VerticalAlignment="Top" Width="100" Click="ShowAdvancedWindow"/>
+        <Button Content="{x:Static res:Strings.cancel}" HorizontalAlignment="Left" Margin="327,390,0,0" VerticalAlignment="Top" Width="76" Click="HideWindow"/>
+        <Button x:Name="saveConfigButton" Content="{x:Static res:Strings.Save}" HorizontalAlignment="Left" Margin="421,390,0,0" VerticalAlignment="Top" Width="74" Click="HideWindow"/>
+        <Button Content="{x:Static res:Strings.advanced}" HorizontalAlignment="Left" Margin="395,352,0,0" VerticalAlignment="Top" Width="100" Click="ShowAdvancedWindow"/>
         <CheckBox x:Name="udpSupportBox" Content="{x:Static res:Strings.UDPSupport}" HorizontalAlignment="Left" Margin="314,16,0,0" VerticalAlignment="Top"/>
         <CheckBox x:Name="shareOverLanBox" Content="{x:Static res:Strings.ShareOverLan}" HorizontalAlignment="Left" Margin="314,47,0,0" VerticalAlignment="Top"/>
-        <Label Content="{x:Static res:Strings.DNSInstruction}" HorizontalAlignment="Left" Margin="30,72,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <CheckBox x:Name="autoStartBox" Content="{x:Static res:Strings.autoStart}" HorizontalAlignment="Left" Margin="314,76,0,0" VerticalAlignment="Top"/>
-        <Label Content="DNS:" HorizontalAlignment="Left" Margin="21,102,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="dnsBox" HorizontalAlignment="Left" Height="23" Margin="62,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="427" VerticalContentAlignment="Center"/>
-        <Label Content="{x:Static res:Strings.ListInstruction}" HorizontalAlignment="Left" Margin="31,128,0,0" VerticalAlignment="Top" FontSize="11"/>
-        <Label Content="{x:Static res:Strings.V2RayServers}" HorizontalAlignment="Left" Margin="18,162,0,0" VerticalAlignment="Top"/>
-        <GroupBox Header="{x:Static res:Strings.ServerInfo}" HorizontalAlignment="Left" Height="213" Margin="145,175,0,0" VerticalAlignment="Top" Width="350">
+        <CheckBox x:Name="autoStartBox" Content="{x:Static res:Strings.autoStart}" HorizontalAlignment="Left" Margin="314,78,0,0" VerticalAlignment="Top"/>
+        <Label Content="DNS" HorizontalAlignment="Left" Margin="86,72,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="dnsBox" HorizontalAlignment="Left" Height="23" Margin="133,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" VerticalContentAlignment="Center" ToolTip="{x:Static res:Strings.ListInstruction}"/>
+        <Label Content="{x:Static res:Strings.V2RayServers}" HorizontalAlignment="Left" Margin="18,113,0,0" VerticalAlignment="Top"/>
+        <GroupBox Header="{x:Static res:Strings.ServerInfo}" HorizontalAlignment="Left" Height="213" Margin="145,126,0,0" VerticalAlignment="Top" Width="350">
             <Grid>
                 <Label Content="{x:Static res:Strings.Address}"  HorizontalAlignment="Right" Margin="0,10,260,0" VerticalAlignment="Top"/>
                 <Label Content="{x:Static res:Strings.UserID}"  HorizontalAlignment="Right" Margin="0,40,260,0" VerticalAlignment="Top"/>
@@ -59,15 +56,15 @@
                 <Button Click="ShowEnhancedWindow" x:Name="enhancedButton" Content="{x:Static res:Strings.enhanced}" HorizontalAlignment="Left" Margin="234,131,0,0" VerticalAlignment="Top" Height="22" Width="94"/>
             </Grid>
         </GroupBox>
-        <Label x:Name="versionLabel" Content="core version" Margin="18,398,0,0" VerticalAlignment="Top" Width="235" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
-        <Label Content="{x:Static res:Strings.loglevel}" HorizontalAlignment="Left" Margin="18,436,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="logLevelBox" HorizontalAlignment="Left" Margin="82,438,0,0" VerticalAlignment="Top" Width="69" SelectedIndex="0">
+        <Label x:Name="versionLabel" Content="core version" Margin="18,349,0,0" VerticalAlignment="Top" Width="235" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+        <Label Content="{x:Static res:Strings.loglevel}" HorizontalAlignment="Left" Margin="18,387,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="logLevelBox" HorizontalAlignment="Left" Margin="82,389,0,0" VerticalAlignment="Top" Width="69" SelectedIndex="0">
             <ComboBoxItem>debug</ComboBoxItem>
         </ComboBox>
-        <Button Click="ShowLogButton_Click" Content="{x:Static res:Strings.showlog}" HorizontalAlignment="Left" Margin="168,439,0,0" VerticalAlignment="Top" Width="76"/>
-        <Button Click="AddVmess" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="18,366,0,0" VerticalAlignment="Top" Width="50"/>
-        <Button Click="RemoveVmess" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="73,366,0,0" VerticalAlignment="Top" Width="52"/>
-        <Menu HorizontalAlignment="Left"  Margin="327,402,0,0" VerticalAlignment="Top" >
+        <Button Click="ShowLogButton_Click" Content="{x:Static res:Strings.showlog}" HorizontalAlignment="Left" Margin="168,390,0,0" VerticalAlignment="Top" Width="76"/>
+        <Button Click="AddVmess" Content="{x:Static res:Strings.add}" HorizontalAlignment="Left" Margin="18,317,0,0" VerticalAlignment="Top" Width="50"/>
+        <Button Click="RemoveVmess" Content="{x:Static res:Strings.remove}" HorizontalAlignment="Left" Margin="73,317,0,0" VerticalAlignment="Top" Width="52"/>
+        <Menu HorizontalAlignment="Left"  Margin="327,353,0,0" VerticalAlignment="Top" >
             <MenuItem Header="{x:Static res:Strings.Import}" Height="18">
                 <MenuItem x:Name="ImportSubscription" Header="{x:Static res:Strings.ImportSubscription}" Click="ImportSubscription_Click"  />
                 <MenuItem x:Name="ImportClipboard" Header="{x:Static res:Strings.ImportClipboard}" Click="ImportClipboard_Click"  />
