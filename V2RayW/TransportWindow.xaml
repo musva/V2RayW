@@ -9,7 +9,7 @@
         ResizeMode="NoResize"
         Title="Transport Settings" Height="288" Width="500" WindowStartupLocation="CenterOwner">
     <Grid>
-        <TabControl x:Name="mainTabControl" HorizontalAlignment="Left" Height="194" Margin="10,10,0,0" VerticalAlignment="Top" Width="465">
+        <TabControl x:Name="mainTabControl" HorizontalAlignment="Left" Height="194" Margin="10,10,0,0" VerticalAlignment="Top" Width="474">
             <TabItem Header="KCP">
                 <Grid Background="#FFE5E5E5">
                     <Label Content="{x:Static res:Strings.mtu}" HorizontalAlignment="Right" Margin="0,22,354,0" VerticalAlignment="Top" />
