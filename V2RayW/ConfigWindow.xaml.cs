@@ -158,7 +158,7 @@ namespace V2RayW
             try
             {
                 Process v2rayProcess = new Process();
-                v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
+                v2rayProcess.StartInfo.FileName = Utilities.corePath;
                 v2rayProcess.StartInfo.Arguments = @"-version";
                 v2rayProcess.StartInfo.RedirectStandardOutput = true;
                 v2rayProcess.StartInfo.UseShellExecute = false;

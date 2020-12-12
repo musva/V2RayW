@@ -151,7 +151,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 To fully take control of the V2Ray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe. 的本地化字符串。
+        ///   查找类似 To fully take control of the V2Ray/Xray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe. 的本地化字符串。
         /// </summary>
         public static string configInstruction {
             get {
@@ -196,7 +196,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 v2ray-core: loaded 的本地化字符串。
+        ///   查找类似 Core : loaded 的本地化字符串。
         /// </summary>
         public static string coreloaded {
             get {
@@ -205,7 +205,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 v2ray-core: unloaded 的本地化字符串。
+        ///   查找类似 Core : unloaded 的本地化字符串。
         /// </summary>
         public static string coreunloaded {
             get {
@@ -511,7 +511,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 V2Ray exits unexpectedly! 的本地化字符串。
+        ///   查找类似 Core exits unexpectedly! 的本地化字符串。
         /// </summary>
         public static string messagecorequit {
             get {
@@ -547,14 +547,17 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 “OK”：V2RayW will open the V2Ray project home page.
+        ///   查找类似 V2RayW currently supports V2Ray and Xray.
+        ///Currently Xray is compatible with V2Ray configuration and Xray has unique features, so Xray is preferred when both cores exist.
+        ///
+        ///“OK”：V2RayW will open the V2Ray project home page.
         ///“Cancel”：Quit V2RayW, Manually download V2Ray and put files into folder v2ray-core。
         ///
         ///Folder v2ray-core should be put in the same folder as V2RayW.exe. The following files should be contained in v2ray-core:
         ///v2ray-core\v2ray.exe
         ///v2ray-core\v2ctl.exe
         ///v2ray-core\geoip.dat
-        ///v2ray-core\geosite.dat 的本地化字符串。
+        ///v2ray-core\ [字符串的其余部分被截断]&quot;; 的本地化字符串。
         /// </summary>
         public static string messagenocore {
             get {
@@ -563,7 +566,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Cannot find V2Ray! 的本地化字符串。
+        ///   查找类似 Cannot find Core! 的本地化字符串。
         /// </summary>
         public static string messagenocoretitle {
             get {
@@ -851,7 +854,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 V2Ray&apos;s Routing rule... 的本地化字符串。
+        ///   查找类似 Core&apos;s Routing rule... 的本地化字符串。
         /// </summary>
         public static string routingrule {
             get {
@@ -1211,7 +1214,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 V2Ray Servers 的本地化字符串。
+        ///   查找类似 Servers List 的本地化字符串。
         /// </summary>
         public static string V2RayServers {
             get {

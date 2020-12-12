@@ -136,10 +136,10 @@
     <value>Configure...</value>
   </data>
   <data name="coreloaded" xml:space="preserve">
-    <value>v2ray-core: loaded</value>
+    <value>Core : loaded</value>
   </data>
   <data name="coreunloaded" xml:space="preserve">
-    <value>v2ray-core: unloaded</value>
+    <value>Core : unloaded</value>
   </data>
   <data name="editpac" xml:space="preserve">
     <value>Edit PAC</value>
@@ -193,7 +193,7 @@
     <value>Restore system proxy to original states</value>
   </data>
   <data name="routingrule" xml:space="preserve">
-    <value>V2Ray's Routing rule...</value>
+    <value>Core's Routing rule...</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>Save</value>
@@ -238,7 +238,7 @@
     <value>View current config.json</value>
   </data>
   <data name="V2RayServers" xml:space="preserve">
-    <value>V2Ray Servers</value>
+    <value>Servers List</value>
   </data>
   <data name="Config" xml:space="preserve">
     <value>Config</value>
@@ -376,23 +376,31 @@
     <value>https://www.v2ray.com/en/configuration/overview.html</value>
   </data>
   <data name="configInstruction" xml:space="preserve">
-    <value>To fully take control of the V2Ray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe.</value>
+    <value>To fully take control of the V2Ray/Xray core, directly put config files (JSON) in the config folder located at the same folder as V2RayW.exe.</value>
   </data>
   <data name="messagecorequit" xml:space="preserve">
-    <value>V2Ray exits unexpectedly!</value>
+    <value>Core exits unexpectedly!</value>
   </data>
   <data name="messagenocore" xml:space="preserve">
-    <value>“OK”：V2RayW will open the V2Ray project home page.
+    <value>V2RayW currently supports V2Ray and Xray.
+Currently Xray is compatible with V2Ray configuration and Xray has unique features, so Xray is preferred when both cores exist.
+
+“OK”：V2RayW will open the V2Ray project home page.
 “Cancel”：Quit V2RayW, Manually download V2Ray and put files into folder v2ray-core。
 
 Folder v2ray-core should be put in the same folder as V2RayW.exe. The following files should be contained in v2ray-core:
 v2ray-core\v2ray.exe
 v2ray-core\v2ctl.exe
 v2ray-core\geoip.dat
-v2ray-core\geosite.dat</value>
+v2ray-core\geosite.dat
+
+Folder xray-core should be put in the same folder as V2RayW.exe. The following files should be contained in xray-core:
+xray-core\xray.exe
+xray-core\geoip.dat
+xray-core\geosite.dat</value>
   </data>
   <data name="messagenocoretitle" xml:space="preserve">
-    <value>Cannot find V2Ray!</value>
+    <value>Cannot find Core!</value>
   </data>
   <data name="messagenotvalidjson" xml:space="preserve">
     <value>Not a valid JSON!</value>

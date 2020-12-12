@@ -59,7 +59,7 @@ namespace V2RayW
         public List<Dictionary<string, object>> routingRuleSets = new List<Dictionary<string, object>> { Utilities.ROUTING_GLOBAL, Utilities.ROUTING_DIRECT, Utilities.ROUTING_BYPASSCN_PRIVATE_APPLE };
 
         private FileSystemWatcher pacFileWatcher;
-
+        
         
         public MainWindow()
         {
@@ -185,12 +185,17 @@ namespace V2RayW
 
             bool findMissingFile = false;
             string coreDirectory = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\";
-            foreach (var file in Utilities.necessaryFiles)
+            string coreDirectoryX = AppDomain.CurrentDomain.BaseDirectory + @"xray-core\";
+            foreach (var file in Utilities.necessaryFiles.Zip(Utilities.necessaryFilesX, Tuple.Create))
             {
-                if (!File.Exists(coreDirectory + file))
+                if (!File.Exists(coreDirectory + file.Item1) && !File.Exists(coreDirectoryX + file.Item2))
                 {
                     findMissingFile = true;
                     break;
+                }
+                if (File.Exists(coreDirectoryX + file.Item2))
+                {
+                    Utilities.corePath = coreDirectoryX + @"xray.exe";
                 }
             }
             if (findMissingFile)
@@ -837,7 +842,7 @@ namespace V2RayW
             try
             {
                 Process v2rayProcessTest = new Process();
-                v2rayProcessTest.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
+                v2rayProcessTest.StartInfo.FileName = Utilities.corePath;
                 v2rayJsonConfigTest = GenerateConfigFileTest(outbound, tag);
                 v2rayProcessTest.StartInfo.Arguments = @" -config http://127.0.0.1:18000/test/config.json";
 #if DEBUG
@@ -924,7 +929,7 @@ namespace V2RayW
         private void InitializeCoreProcess()
         {
             v2rayProcess = new System.Diagnostics.Process();
-            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
+            v2rayProcess.StartInfo.FileName = Utilities.corePath;
             Debug.WriteLine(v2rayProcess.StartInfo.FileName);
             v2rayProcess.StartInfo.Arguments = @"-config http://127.0.0.1:18000/config.json";
 #if DEBUG

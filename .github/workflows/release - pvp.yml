@@ -1,0 +1,52 @@
+name: .NET Build & Release
+
+on:
+  push:
+    branches: [ PVP ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Release]
+
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
+
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-api-key: $${{ secrets.GITHUB_TOKEN }}
+        nuget-version: '5.x'
+
+    - name: NuGet restore
+      run: nuget restore
+
+    - name: Build the solution
+      run: msbuild /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+    
+    - name: Package
+      shell: bash
+      run:  7z a -tzip "V2RayW.zip" "${{github.workspace}}\V2RayW\bin\Release\*"
+      
+    - name: Release 
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "v3.0"
+          prerelease: false
+          title: "v3.0"
+          files:  |
+            V2RayW.zip
+     

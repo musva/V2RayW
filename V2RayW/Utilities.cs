@@ -92,6 +92,7 @@ namespace V2RayW
         public static string corePath = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
 
         public static string[] necessaryFiles = new string[] {"v2ray.exe", "v2ctl.exe", "geoip.dat", "geosite.dat" };
+        public static string[] necessaryFilesX = new string[] { "xray.exe", "geoip.dat", "geosite.dat" };
 
         public static string suggestedCore = "V2Ray 4.14.0 (Po) 20190131";
         public static List<string> PROTOCOL_LIST = new List<string> { @"vmess", @"vless" };

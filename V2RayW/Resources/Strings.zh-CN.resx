@@ -136,10 +136,10 @@
     <value>配置...</value>
   </data>
   <data name="coreloaded" xml:space="preserve">
-    <value>V2Ray: 已加载</value>
+    <value>Core : 已加载</value>
   </data>
   <data name="coreunloaded" xml:space="preserve">
-    <value>V2Ray: 未加载</value>
+    <value>Core : 未加载</value>
   </data>
   <data name="editpac" xml:space="preserve">
     <value>编辑 PAC</value>
@@ -157,7 +157,7 @@
     <value>等级：</value>
   </data>
   <data name="loadcore" xml:space="preserve">
-    <value>加载 V2Ray</value>
+    <value>加载 Core</value>
   </data>
   <data name="LocalHTTPPort" xml:space="preserve">
     <value>本地 HTTP 端口：</value>
@@ -193,7 +193,7 @@
     <value>恢复至初始状态</value>
   </data>
   <data name="routingrule" xml:space="preserve">
-    <value>V2Ray 内部路由规则...</value>
+    <value>Core 内部路由规则...</value>
   </data>
   <data name="Save" xml:space="preserve">
     <value>保存</value>
@@ -220,7 +220,7 @@
     <value>支持 UDP</value>
   </data>
   <data name="unloadcore" xml:space="preserve">
-    <value>关闭 V2Ray</value>
+    <value>关闭 Core</value>
   </data>
   <data name="updatesubscription" xml:space="preserve">
     <value>更新订阅</value>
@@ -238,7 +238,7 @@
     <value>查看当前配置文件</value>
   </data>
   <data name="V2RayServers" xml:space="preserve">
-    <value>V2Ray 服务器</value>
+    <value>服务器列表</value>
   </data>
   <data name="Config" xml:space="preserve">
     <value>配置文件</value>
@@ -376,23 +376,31 @@
     <value>https://www.v2ray.com/chapter_02/01_overview.html</value>
   </data>
   <data name="configInstruction" xml:space="preserve">
-    <value>若需完全自定义 V2Ray 的功能，则将完整的配置文件放在 config 文件夹内。config 文件夹和 V2RayW.exe 在同一个文件夹内。</value>
+    <value>若需完全自定义 V2Ray/Xray 的功能，则将完整的配置文件放在 config 文件夹内。config 文件夹和 V2RayW.exe 在同一个文件夹内。</value>
   </data>
   <data name="messagecorequit" xml:space="preserve">
-    <value>V2Ray 意外退出！</value>
+    <value>Core 意外退出！</value>
   </data>
   <data name="messagenocore" xml:space="preserve">
-    <value>“确定”：V2RayW 将打开V2Ray项目主页。
+    <value>V2RayW当前支持V2Ray和Xray。
+目前Xray兼容V2Ray配置且Xray有独特功能，所以当两个核心均存在的情况下优先使用Xray。
+
+“确定”：V2RayW 将打开V2Ray项目主页。
 “取消”：退出 V2RayW，自行下载 V2Ray 并把相关文件放到 v2ray-core 文件夹内。
 
 v2ray-core 文件夹与 V2RayW.exe 放在同一文件夹下，v2ray-core 文件夹需包含：
 v2ray-core\v2ray.exe
 v2ray-core\v2ctl.exe
 v2ray-core\geoip.dat
-v2ray-core\geosite.dat</value>
+v2ray-core\geosite.dat
+
+xray-core 文件夹与 V2RayW.exe 放在同一文件夹下，xray-core 文件夹需包含：
+xray-core\xray.exe
+xray-core\geoip.dat
+xray-core\geosite.dat</value>
   </data>
   <data name="messagenocoretitle" xml:space="preserve">
-    <value>没有找到 V2Ray！</value>
+    <value>没有找到 Core！</value>
   </data>
   <data name="messagenotvalidjson" xml:space="preserve">
     <value>无效 JSON!</value>
