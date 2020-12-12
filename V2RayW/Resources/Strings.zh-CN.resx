@@ -514,4 +514,7 @@ v2ray-core\geosite.dat</value>
   <data name="messagefilecreatefail" xml:space="preserve">
     <value>无法创建文件！</value>
   </data>
+  <data name="enableflow" xml:space="preserve">
+    <value>开启流控</value>
+  </data>
 </root>

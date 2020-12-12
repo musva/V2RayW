@@ -295,6 +295,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Enable Flow 的本地化字符串。
+        /// </summary>
+        public static string enableflow {
+            get {
+                return ResourceManager.GetString("enableflow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Enable Mux 的本地化字符串。
         /// </summary>
         public static string enableMux {

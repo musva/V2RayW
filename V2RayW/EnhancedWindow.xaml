@@ -18,7 +18,8 @@
             </TabItem>
             <TabItem Header="Flow">
                 <Grid Background="#FFE5E5E5">
-                    <CheckBox x:Name="flowCheckBox" Content="{x:Static res:Strings.customizeflow}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <CheckBox IsEnabled="{Binding ElementName=enableFlow, Path=IsChecked}" x:Name="flowCheckBox" Content="{x:Static res:Strings.customizeflow}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <CheckBox x:Name="enableFlow" Content="{x:Static res:Strings.enableflow}" HorizontalAlignment="Left" Margin="376,10,0,0" VerticalAlignment="Top"/>
                     <TextBox Padding="4" IsEnabled="{Binding ElementName=flowCheckBox, Path=IsChecked}" x:Name="flowContentBox" HorizontalAlignment="Left" Height="124" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" FontFamily="Lucida Console" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
                 </Grid>
             </TabItem>

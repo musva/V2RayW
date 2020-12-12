@@ -36,8 +36,13 @@ namespace V2RayW
             #endregion encryption
 
             #region flow
-            flowCheckBox.IsChecked = selectedUserInfo["flow"].ToString()!="";
-            flowContentBox.Text = selectedUserInfo["flow"].ToString();
+            enableFlow.IsChecked = selectedUserInfo.ContainsKey("flow");           
+            if (enableFlow.IsChecked ?? false)
+            {
+                flowCheckBox.IsChecked = selectedUserInfo["flow"].ToString() != "";
+                flowContentBox.Text = selectedUserInfo["flow"].ToString();
+            }
+            
             #endregion flow
         }
         private void SaveButton_Click(object sender, RoutedEventArgs e)
@@ -63,31 +68,45 @@ namespace V2RayW
             { 
                 selectedUserInfo["encryption"] = "none";
             }
-            if (flowCheckBox.IsChecked ?? false)
+            if (enableFlow.IsChecked ?? false)
             {
-                try
+                selectedUserInfo["flow"] = selectedUserInfo.ContainsKey("flow") ? selectedUserInfo["flow"].ToString() : "";
+                if (flowCheckBox.IsChecked ?? false)
                 {
-                    selectedUserInfo["flow"] = flowContentBox.Text.ToString();
-                    if (streamSettings["security"] as string == "tls")
+                    try
                     {
-                        streamSettings["security"] = "xtls";
-                        configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "tlsSettings" ? "xtlsSettings" : k.Key, k => k.Value);
+                        selectedUserInfo["flow"] = flowContentBox.Text.ToString();
+                        if (streamSettings["security"] as string == "tls")
+                        {
+                            streamSettings["security"] = "xtls";
+                            configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "tlsSettings" ? "xtlsSettings" : k.Key, k => k.Value);
+                        }
+                    }
+                    catch
+                    {
+                        MessageBox.Show("flow " + "\n" + flowContentBox.Text, Strings.messagenotvalidjson);
+                        return;
+                    }
+                } else
+                {
+                    selectedUserInfo["flow"] = "";
+                    if (streamSettings["security"] as string == "xtls")
+                    {
+                        streamSettings["security"] = "tls";
+                        streamSettings.Remove("tlsSettings");
+                        configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
                     }
                 }
-                catch
-                {
-                    MessageBox.Show("flow " + "\n" + flowContentBox.Text, Strings.messagenotvalidjson);
-                    return;
-                }
-            }else
+            } else
             {
-                selectedUserInfo["flow"] = "";
+                selectedUserInfo.Remove("flow");
                 if (streamSettings["security"] as string == "xtls")
                 {
                     streamSettings["security"] = "tls";
                     streamSettings.Remove("tlsSettings");
                     configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
                 }
+                
             }
             
             this.Close();

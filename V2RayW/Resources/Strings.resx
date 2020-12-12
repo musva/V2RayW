@@ -514,4 +514,7 @@ v2ray-core\geosite.dat</value>
   <data name="messagefilecreatefail" xml:space="preserve">
     <value>Cannot create file(s)!</value>
   </data>
+  <data name="enableflow" xml:space="preserve">
+    <value>Enable Flow</value>
+  </data>
 </root>
