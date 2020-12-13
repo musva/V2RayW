@@ -98,7 +98,7 @@ namespace V2RayW
             } else
             {
                 selectedUserInfo.Remove("flow");
-                streamSettings["security"] = streamSettings["security"].ToString() == "xtls" ? "tls" : streamSettings["security"]; ;               
+                streamSettings["security"] = streamSettings["security"].ToString() == "xtls" ? "tls" : streamSettings["security"];              
                 if (streamSettings.ContainsKey("xtlsSettings"))
                 {
                     streamSettings.Remove("tlsSettings");

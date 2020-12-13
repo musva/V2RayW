@@ -370,6 +370,13 @@ namespace V2RayW
                     selectedUserInfo["alterId"] = int.Parse(alterIdBox.Text);
                     selectedUserInfo["security"]= selectedUserInfo.ContainsKey("security") ? selectedUserInfo["security"].ToString() : "auto";
                     selectedUserInfo.Remove("encryption");
+                    selectedUserInfo.Remove("flow");
+                    streamSettings["security"] = streamSettings["security"].ToString() == "xtls" ? "tls" : streamSettings["security"];
+                    if (streamSettings.ContainsKey("xtlsSettings"))
+                    {
+                        streamSettings.Remove("tlsSettings");
+                        selectedProfile["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
+                    }
                 }
                 if (selectedProfile["protocol"] as string == "vless")
                 {
