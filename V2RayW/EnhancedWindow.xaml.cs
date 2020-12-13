@@ -71,16 +71,13 @@ namespace V2RayW
             if (enableFlow.IsChecked ?? false)
             {
                 selectedUserInfo["flow"] = selectedUserInfo.ContainsKey("flow") ? selectedUserInfo["flow"].ToString() : "";
-                if (flowCheckBox.IsChecked ?? false)
+                if ((flowCheckBox.IsChecked ?? false) && flowContentBox.Text.Trim().Length != 0)
                 {
                     try
                     {
                         selectedUserInfo["flow"] = flowContentBox.Text.ToString();
-                        if (streamSettings["security"] as string == "tls")
-                        {
-                            streamSettings["security"] = "xtls";
-                            configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "tlsSettings" ? "xtlsSettings" : k.Key, k => k.Value);
-                        }
+                        streamSettings["security"] = streamSettings["security"].ToString() == "tls" ? "xtls" : streamSettings["security"]; ;
+                        selectedProfile["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "tlsSettings" ? "xtlsSettings" : k.Key, k => k.Value);
                     }
                     catch
                     {
@@ -90,23 +87,23 @@ namespace V2RayW
                 } else
                 {
                     selectedUserInfo["flow"] = "";
-                    if (streamSettings["security"] as string == "xtls")
+                    streamSettings["security"] = streamSettings["security"].ToString() == "xtls" ? "tls" : streamSettings["security"];
+                    
+                    if (streamSettings.ContainsKey("xtlsSettings"))
                     {
-                        streamSettings["security"] = "tls";
                         streamSettings.Remove("tlsSettings");
-                        configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
+                        selectedProfile["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
                     }
                 }
             } else
             {
                 selectedUserInfo.Remove("flow");
-                if (streamSettings["security"] as string == "xtls")
+                streamSettings["security"] = streamSettings["security"].ToString() == "xtls" ? "tls" : streamSettings["security"]; ;               
+                if (streamSettings.ContainsKey("xtlsSettings"))
                 {
-                    streamSettings["security"] = "tls";
                     streamSettings.Remove("tlsSettings");
-                    configWindow.profiles[configWindow.vmessListBox.SelectedIndex]["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
-                }
-                
+                    selectedProfile["streamSettings"] = streamSettings.ToDictionary(k => k.Key == "xtlsSettings" ? "tlsSettings" : k.Key, k => k.Value);
+                }     
             }
             
             this.Close();

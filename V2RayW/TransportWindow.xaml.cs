@@ -108,10 +108,14 @@ namespace V2RayW
 
             #region tls
             tlsEnableBox.IsChecked = streamSettings["security"] as string == "tls" || streamSettings["security"] as string == "xtls";
-            Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> tlsSettings = new Dictionary<string, object>();
             if (streamSettings["security"] as string == "xtls")
             {
                 tlsSettings = streamSettings["xtlsSettings"] as Dictionary<string, object>;
+            }
+            else
+            {
+                tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
             }
             tlsAlpnBox.Text = String.Join(",", tlsSettings["alpn"] as object[]);
             tlsServerBox.Text = tlsSettings["serverName"] as string;
@@ -223,21 +227,24 @@ namespace V2RayW
                 {"security", quicSecurityBox.SelectedItem.ToString() },
                 {"header", new Dictionary<string, object>{ { "type", quicHeaderBox.SelectedItem.ToString() } } }
             };
-            streamSettings["security"] = tlsEnableBox.IsChecked ?? false ? streamSettings["security"].ToString() : "none";
-            Dictionary<string, object> tlsxtlsSettings = new Dictionary<string, object> {
+            Dictionary<string, object> tlsSettings = new Dictionary<string, object> {
                 { "allowInsecure", tlsInsecureBox.IsChecked ?? false },
                 { "alpn", tlsAlpnBox.Text.Split(',') },
                 { "serverName", tlsServerBox.Text.Trim() },
                 { "allowInsecureCiphers", tlsInsecureCipherBox.IsChecked ?? false }
             };
-            if (streamSettings["security"] as string == "tls")
+            if (streamSettings.ContainsKey("tlsSettings"))
             {
-                streamSettings["tlsSettings"] = tlsxtlsSettings;
+                streamSettings["tlsSettings"] = tlsSettings;
+                streamSettings["security"] = "tls";
             }
-            if(streamSettings["security"] as string == "xtls")
+            if (streamSettings.ContainsKey("xtlsSettings"))
             {
-                streamSettings["xtlsSettings"] = tlsxtlsSettings;
-            }
+                streamSettings.Remove("tlsSettings");
+                streamSettings["xtlsSettings"] = tlsSettings;
+                streamSettings["security"] = "xtls";
+            }        
+            streamSettings["security"] = tlsEnableBox.IsChecked ?? false ? streamSettings["security"].ToString() : "none";
             this.Close();
         }
 
