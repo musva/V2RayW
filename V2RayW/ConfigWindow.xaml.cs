@@ -109,7 +109,10 @@ namespace V2RayW
             {
                 if (VmessForUI(outbound))
                 {
-                    Utilities.AddMissingKeysForVmess(outbound);
+                    if (outbound["protocol"].ToString() == "vmess")
+                    {
+                        Utilities.AddMissingKeysForVmess(outbound);
+                    }
                     profiles.Add(outbound);
                 }
                 else

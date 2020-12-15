@@ -492,10 +492,6 @@ namespace V2RayW
             }
         }
 
-        private bool exceed(int s)
-        {
-            return (profiles.Count + subsOutbounds.Count) < selectedPartServerIndex.Count ? true : false;
-        }
         #endregion
 
         #region system proxy management
