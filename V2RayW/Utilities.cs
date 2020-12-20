@@ -132,7 +132,10 @@ namespace V2RayW
         {
             return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.vmessjson);
         }
-
+        public static Dictionary<string, object> VlessOutboundTemplate()
+        {
+            return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.vlesstemplate);
+        }
         public static Dictionary<string, object> VmessOutboundTemplateNew()
         {
             return javaScriptSerializer.Deserialize<dynamic>(V2RayW.Properties.Resources.vmesstemplate);
