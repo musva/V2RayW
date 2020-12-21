@@ -103,7 +103,7 @@ namespace V2RayW
                 {
                     if (outbound["protocol"].ToString() == "vmess")
                     {
-                        Utilities.AddMissingKeysForVmess(outbound);
+                        Utilities.AddMissingKeysForVmess(outbound); 
                     }
                     profiles.Add(outbound);
                 }
@@ -121,7 +121,7 @@ namespace V2RayW
             httpPortBox.Text = mainWindow.httpPort.ToString();
             dnsBox.Text = mainWindow.dnsString;
             logLevelBox.SelectedIndex = Utilities.LOG_LEVEL_LIST.FindIndex(x => x == mainWindow.logLevel);
-
+            
             vmessListBox.Items.Clear();
             foreach (Dictionary<string, object> profile in profiles)
             {
@@ -428,23 +428,24 @@ namespace V2RayW
         private void ShareMenuItem_Click(object sender, RoutedEventArgs e)
         {
             Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
+            Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
+            Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
+            Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> kcpSettings = streamSettings["kcpSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> kcpSettingsT = kcpSettings["header"] as Dictionary<string, object>;
+            Dictionary<string, object> tcpSettings = streamSettings["tcpSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> tcpSettingsT = tcpSettings["header"] as Dictionary<string, object>;
+            Dictionary<string, object> wsSettings = streamSettings["wsSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> wsSettingsT = wsSettings["headers"] as Dictionary<string, object>;
+            Dictionary<string, object> httpSettings = streamSettings["httpSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> quicSettings = streamSettings["quicSettings"] as Dictionary<string, object>;
+            Dictionary<string, object> quicSettingsT = quicSettings["header"] as Dictionary<string, object>;
+            string shareurl = null;
+
             try
             {
-                if (vmessListBox.SelectedIndex >= 0 && vmessListBox.SelectedIndex < profiles.Count && selectedProfile["protocol"] as string == "vmess")
+                if (selectedProfile["protocol"] as string == "vmess" && sender== ShareLegacy)
                 {
-                    Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
-                    Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
-                    Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> kcpSettings = streamSettings["kcpSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> kcpSettingsT = kcpSettings["header"] as Dictionary<string, object>;
-                    Dictionary<string, object> tcpSettings = streamSettings["tcpSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> tcpSettingsT = tcpSettings["header"] as Dictionary<string, object>;
-                    Dictionary<string, object> wsSettings = streamSettings["wsSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> wsSettingsT = wsSettings["headers"] as Dictionary<string, object>;
-                    Dictionary<string, object> httpSettings = streamSettings["httpSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> quicSettings = streamSettings["quicSettings"] as Dictionary<string, object>;
-                    Dictionary<string, object> quicSettingsT = quicSettings["header"] as Dictionary<string, object>;
-                    Dictionary<string, object> tlsSettings = streamSettings["tlsSettings"] as Dictionary<string, object>;
                     VmessLink vlink = new VmessLink();
                     vlink.v = "2";
                     vlink.ps = selectedProfile["tag"].ToString();
@@ -483,16 +484,63 @@ namespace V2RayW
                             break;
                     }
                     var sharejson = Utilities.javaScriptSerializer.Serialize(vlink);
-                    ExtraUtils.SetClipboardData(ExtraUtils.Base64Encode(sharejson).Insert(0, "vmess://"));
+                    shareurl = ExtraUtils.Base64Encode(sharejson).Insert(0, "vmess://");
                 }
                 else
                 {
-                    ExtraUtils.SetClipboardData("");
+                    string generateurl = selectedProfile["protocol"].ToString() + "://" + HttpUtility.UrlEncode(selectedUserInfo["id"].ToString()) + "@" + selectedVnext["address"].ToString() + ":" + selectedVnext["port"].ToString();
+                    List<string> specific = new List<string>();
+                    specific.Add(streamSettings["network"].ToString() != "tcp" ? "type=" + streamSettings["network"].ToString() : null);
+                    specific.Add(selectedProfile["protocol"].ToString() == "vmess" && selectedUserInfo["security"].ToString() != "auto" ? "encryption=" + selectedUserInfo["security"].ToString() : null);
+                    specific.Add(selectedProfile["protocol"].ToString() == "vless" && selectedUserInfo.ContainsKey("encryption") && selectedUserInfo["encryption"].ToString() != "none" ? "encryption=" + selectedUserInfo["encryption"].ToString() : null);
+                    specific.Add(streamSettings["security"].ToString() != "none" ? "security=" + streamSettings["security"].ToString() : null);
+                    switch (streamSettings["network"])
+                    {
+                        case "ws":
+                            specific.Add("path=" + HttpUtility.UrlEncode(wsSettings["path"].ToString()));
+                            specific.Add("host=" + wsSettingsT["host"].ToString());
+                            break;
+                        case "http":
+                            specific.Add("path=" + httpSettings["path"].ToString());
+                            specific.Add("host=" + HttpUtility.UrlEncode(String.Join(",", httpSettings["host"])));
+                            break;
+                        case "kcp":
+                            specific.Add(kcpSettingsT["type"].ToString() != "none" ? "headerType=" + kcpSettingsT["type"].ToString() : null);
+                            specific.Add(kcpSettings.ContainsKey("seed") ? "seed=" + HttpUtility.UrlEncode(kcpSettings["seed"].ToString()) : null);
+                            break;
+                        case "quic":
+                            specific.Add(quicSettings["security"].ToString() != "none" ? "quicSecurity=" + quicSettings["security"].ToString() : null);
+                            specific.Add(quicSettings["security"].ToString() != "none" ? "key=" + HttpUtility.UrlEncode(quicSettings["key"].ToString()) : null);
+                            specific.Add(quicSettingsT["type"].ToString() != "none" ? "headerType=" + quicSettingsT["type"].ToString() : null);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (selectedProfile["protocol"] as string == "vless" && selectedUserInfo.ContainsKey("flow") && selectedUserInfo["flow"] as string != "")
+                    {
+                        specific.Add((streamSettings["xtlsSettings"] as Dictionary<string, object>)["serverName"].ToString() != selectedVnext["address"].ToString() ? "sni=" + (streamSettings["xtlsSettings"] as Dictionary<string, object>)["serverName"].ToString() : null);
+                        specific.Add(String.Join(",", (streamSettings["xtlsSettings"] as Dictionary<string, object>)["alpn"] as IList<object>) != @"h2,http/1.1" ? "alpn=" + HttpUtility.UrlEncode(String.Join(",", (streamSettings["xtlsSettings"] as Dictionary<string, object>)["alpn"] as IList<object>)) : null);
+                        specific.Add("flow=" + selectedUserInfo["flow"].ToString());
+                    }
+                    else
+                    {
+                        specific.Add((streamSettings["tlsSettings"] as Dictionary<string, object>)["serverName"].ToString() != selectedVnext["address"].ToString() ? "sni=" + (streamSettings["tlsSettings"] as Dictionary<string, object>)["serverName"].ToString() : null);
+                        specific.Add(String.Join(",", (streamSettings["tlsSettings"] as Dictionary<string, object>)["alpn"] as IList<object>) != @"h2,http/1.1" ? "alpn=" + HttpUtility.UrlEncode(String.Join(",", (streamSettings["tlsSettings"] as Dictionary<string, object>)["alpn"] as IList<object>)) : null);
+                    }
+                    specific.RemoveAll(x => x == null);
+                    if (specific.Count > 0)
+                    {
+                        generateurl += "?" + String.Join("&", specific);
+                    }
+                    generateurl += ("#" + HttpUtility.UrlEncode(selectedProfile["tag"].ToString()));
+                    shareurl = generateurl;
                 }
+                ExtraUtils.SetClipboardData(shareurl);
             }
             catch
             {
-                MessageBox.Show(Strings.Share, Strings.messagenotvalidjson);   
+                MessageBox.Show(Strings.Share, Strings.messageformatexception);   
             }
            
         }

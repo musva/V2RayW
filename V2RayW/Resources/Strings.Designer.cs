@@ -989,6 +989,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Share(Legacy,only VMess) 的本地化字符串。
+        /// </summary>
+        public static string ShareLegacy {
+            get {
+                return ResourceManager.GetString("ShareLegacy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Share Over LAN 的本地化字符串。
         /// </summary>
         public static string ShareOverLan {

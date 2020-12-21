@@ -525,4 +525,7 @@ xray-core\geosite.dat</value>
   <data name="enableflow" xml:space="preserve">
     <value>Enable Flow</value>
   </data>
+  <data name="ShareLegacy" xml:space="preserve">
+    <value>Share(Legacy,only VMess)</value>
+  </data>
 </root>
