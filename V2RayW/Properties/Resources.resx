@@ -132,6 +132,79 @@
   <data name="simplepac" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\simplepac.txt.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="vlesstemplate" xml:space="preserve">
+    <value>{
+      "sendThrough": "0.0.0.0",
+      "mux": {
+        "enabled": false,
+        "concurrency": 8
+      },
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "server.cc",
+            "users": [
+              {
+                "id": "12345678-1234-1234-1234-12345678abcd",
+                "encryption": "none",
+                "level": 0
+              }
+            ],
+            "port": 12345
+          }
+        ]
+      },
+      "tag": "vless outbound",
+      "streamSettings": {
+        "wsSettings": {
+          "path": "/",
+          "headers": {}
+        },
+        "quicSettings": {
+          "key": "key",
+          "security": "none",
+          "header": {
+            "type": "none"
+          }
+        },
+        "tlsSettings": {
+          "allowInsecure": false,
+          "alpn": [
+            "http/1.1"
+          ],
+          "serverName": "server.cc",
+          "allowInsecureCiphers": false
+        },
+        "httpSettings": {
+          "host": [
+            "server.cc"
+          ],
+          "path": "/"
+        },
+        "kcpSettings": {
+          "header": {
+            "type": "none"
+          },
+          "mtu": 1350,
+          "congestion": false,
+          "tti": 50,
+          "uplinkCapacity": 5,
+          "writeBufferSize": 2,
+          "readBufferSize": 2,
+          "downlinkCapacity": 20
+        },
+        "tcpSettings": {
+          "header": {
+            "type": "none"
+          }
+        },
+        "security": "none",
+        "network": "tcp",
+        "sockopt": {}
+      }
+    }</value>
+  </data>
   <data name="vmessjson" xml:space="preserve">
     <value>{"sendThrough":"0.0.0.0","mux":{"enabled":false,"concurrency":8},"protocol":"vmess","settings":{"vnext":[{"address":"server.cc","users":[{"id":"12345678-1234-1234-1234-12345678abcd","alterId":0,"security":"auto","level":0}],"port":12345}]},"tag":"vmess outbound","streamSettings":{"wsSettings":{"path":"","headers":{}},"quicSettings":{"key":"key","security":"none","header":{"type":"none"}},"tlsSettings":{"allowInsecure":false,"alpn":["http\/1.1"],"serverName":"server.cc","allowInsecureCiphers":false},"httpSettings":{"path":""},"kcpSettings":{"header":{"type":"none"},"mtu":1350,"congestion":false,"tti":50,"uplinkCapacity":5,"writeBufferSize":2,"readBufferSize":2,"downlinkCapacity":20},"tcpSettings":{"header":{"type":"none"}},"security":"none","network":"tcp","sockopt":{}}}</value>
   </data>

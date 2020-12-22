@@ -47,8 +47,8 @@ namespace V2RayW.Properties {
         }
         
         /// <summary>
-        ///   重写当前线程的 CurrentUICulture 属性
-        ///   重写当前线程的 CurrentUICulture 属性。
+        ///   重写当前线程的 CurrentUICulture 属性，对
+        ///   使用此强类型资源类的所有资源查找执行重写。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Globalization.CultureInfo Culture {
@@ -112,6 +112,37 @@ namespace V2RayW.Properties {
         internal static string simplepac {
             get {
                 return ResourceManager.GetString("simplepac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 {
+        ///      &quot;sendThrough&quot;: &quot;0.0.0.0&quot;,
+        ///      &quot;mux&quot;: {
+        ///        &quot;enabled&quot;: false,
+        ///        &quot;concurrency&quot;: 8
+        ///      },
+        ///      &quot;protocol&quot;: &quot;vless&quot;,
+        ///      &quot;settings&quot;: {
+        ///        &quot;vnext&quot;: [
+        ///          {
+        ///            &quot;address&quot;: &quot;server.cc&quot;,
+        ///            &quot;users&quot;: [
+        ///              {
+        ///                &quot;id&quot;: &quot;12345678-1234-1234-1234-12345678abcd&quot;,
+        ///                &quot;encryption&quot;: &quot;none&quot;,
+        ///                &quot;level&quot;: 0
+        ///              }
+        ///            ],
+        ///            &quot;port&quot;: 12345
+        ///          }
+        ///        ]
+        ///      },
+        ///      &quot;tag&quot;:  [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string vlesstemplate {
+            get {
+                return ResourceManager.GetString("vlesstemplate", resourceCulture);
             }
         }
         

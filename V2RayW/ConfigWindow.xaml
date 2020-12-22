@@ -21,6 +21,7 @@
                 <ContextMenu>
                     <MenuItem Header="{x:Static res:Strings.Clone}" Click="CloneMenuItem_Click"></MenuItem>
                     <MenuItem Header="{x:Static res:Strings.Share}" Click="ShareMenuItem_Click"></MenuItem>
+                    <MenuItem Header="{x:Static res:Strings.ShareLegacy}" Click="ShareMenuItem_Click" x:Name="ShareLegacy"></MenuItem>
                 </ContextMenu>
             </ListBox.ContextMenu>
         </ListBox>

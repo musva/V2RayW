@@ -508,4 +508,7 @@ v2ray-core\geosite.dat</value>
   <data name="messagefilecreatefail" xml:space="preserve">
     <value>无法创建文件！</value>
   </data>
+  <data name="ShareLegacy" xml:space="preserve">
+    <value>分享至剪切板(旧版本)</value>
+  </data>
 </root>
