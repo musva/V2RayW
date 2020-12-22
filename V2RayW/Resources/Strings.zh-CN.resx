@@ -526,6 +526,6 @@ xray-core\geosite.dat</value>
     <value>开启流控</value>
   </data>
   <data name="ShareLegacy" xml:space="preserve">
-    <value>分享至剪切板(旧版本，仅VMess)</value>
+    <value>分享至剪切板(旧版本)</value>
   </data>
 </root>

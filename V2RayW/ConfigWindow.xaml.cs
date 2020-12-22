@@ -341,12 +341,13 @@ namespace V2RayW
         }
 
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        {           
             if (vmessListBox.SelectedIndex < 0 || vmessListBox.SelectedIndex >= profiles.Count) return;
             Dictionary<string, object> selectedProfile = profiles[vmessListBox.SelectedIndex];
             Dictionary<string, object> selectedVnext = ((selectedProfile["settings"] as Dictionary<string, object>)["vnext"] as IList<object>)[0] as Dictionary<string, object>;
             Dictionary<string, object> selectedUserInfo = (selectedVnext["users"] as IList<object>)[0] as Dictionary<string, object>;
             Dictionary<string, object> streamSettings = selectedProfile["streamSettings"] as Dictionary<string, object>;
+            ShareLegacy.Visibility = selectedProfile["protocol"] as string == "vmess" ? Visibility.Visible : Visibility.Collapsed;
             if (sender == securityComboBox)
             {
                 selectedUserInfo["security"] = (sender as ComboBox).SelectedItem.ToString();
