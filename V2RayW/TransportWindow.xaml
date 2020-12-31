@@ -35,7 +35,6 @@
                 <Grid Background="#FFE5E5E5">
                     <CheckBox x:Name="tcpHeaderCheckBox" Content="{x:Static res:Strings.customizehttpheader}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <TextBox Padding="4" IsEnabled="{Binding ElementName=tcpHeaderCheckBox, Path=IsChecked}" x:Name="tcpHeaderContentBox" HorizontalAlignment="Left" Height="124" Margin="10,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="439" FontFamily="Lucida Console" HorizontalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-                    <Button Click="TcpExampleButton_Click" Content="{x:Static res:Strings.seeexample}" HorizontalAlignment="Left" Margin="172,7,0,0" VerticalAlignment="Top" Width="86"/>
                     <CheckBox x:Name="tcpForceBox" Content="{x:Static res:Strings.ForceTcpFastOpen}" HorizontalAlignment="Left" Margin="303,10,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>

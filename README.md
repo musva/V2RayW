@@ -1,27 +1,64 @@
-# V2RayW: A simple GUI for V2Ray on Windows
+#  V2RayW: Windows平台上一套基于V2Ray和Xray项目的GUI软件
 
-## What is V2Ray?
+本项目Fork自[https://github.com/Cenmrev/V2RayW](https://github.com/Cenmrev/V2RayW)。
+> **本项目根据自用需求酌情添加新功能。**
 
-[Project V2Ray](https://www.v2ray.com).
+## 与V2RayW原始项目有何不同 ？
+- 支持VLESS协议配置
+- 支持Xray核心
+- 节点测速功能
+- 订阅功能
+- 导入导出分享链接
+- 部分出口负载均衡
 
-## Download V2RayW
+- V2RayW原始项目特点
+   - 支持超高清分辨率（4K）
+   - 静默运行，使用托盘右键满足日常使用
+   -  **UI界面仅支持VMESS配置，其他协议手写`出站协议`**
+   - 支持加载自定义V2Ray原生配置
+   - 配置文件较大程度保留了原生V2Ray配置格式
 
-[Releases](https://github.com/Cenmrev/V2RayW/releases)
+## 适用人群
+- 自建节点或有稳定**少量**高质量节点的机场用户
+- 较为了解V2Ray配置文件
 
-## How deos V2RayW work
+## 版本区别
 
-V2RayW.exe provides a GUI to generate the config file for v2ray-core (v2ray.exe). It also allow users to change Windows proxy settings and switch proxy servers on the system tray.
+3.X版本支持V2Ray/Xray双核心。当存在Xray时优先使用，目前没有切换功能，如需使用V2Ray核心需删除或重命名xray-core目录。Xray支持xtls特性，当切换为V2Ray核心时仔细检查修正`settings.json`配置文件
 
-### Add V2RayW to startup
+2.X版本仅支持V2Ray核心。当2.X版本导入支持xtls特性的分享链接时将会被降级。
 
-[English](http://tunecomp.net/add-app-to-startup/) 
-[中文](http://jingyan.baidu.com/article/90895e0ff3a41f64ec6b0bc3.html)
+## 使用说明
 
-### Reset V2RayW
+- 如何使用
+   - 将V2Ray/Xray核心放置在软件目录下的v2ray-core / xray-core文件夹中
+- 如何重置
+  - 关闭软件，删除软件目录下`settings.json`文件
+- 导入分享链接
+  - 复制分享链接，支持多条，当前支持**VLESS/VMESS/shadowsocks**协议
+  - 使用：主界面，`导入...`-`从剪切板URL`
+- 导出分享链接
+  - 当前支持**VLESS/VMESS**协议
+  - 使用：主界面，服务器列表右击
+- 订阅功能
+  - 每行一条URL
+  - URL行首添加任意字符以达到临时禁用订阅链接目的
+  -  使用：主界面，`导入...`-`从订阅链接`
+- 负载均衡
+  - `使用全部`，将使用配置文件中outbound所有节点
+  - `使用部分`，可选多个节点，最少一个，节点处于选中状态时反选即为去除，反选`使用部分`即可退出
+  - 使用：托盘图标右击-`服务器`-`使用全部/使用部分`
+- 路由编辑
+  - 路由匹配从上至下请注意规则顺序，非常重要
+  - 域名/IP使用`---`分割，上半部分域名下半部分IP
+  - 拒绝，在`转发至`填写`decline`
+  - 直连，在`转发至`填写`direct`
+  - 代理，在`转发至`填写`main`
+- 自定义配置文件
+  - 软件目录下config文件夹放置原生V2Ray/Xray配置文件
+  - 新增自定义配置文件无需重启，`高级`-`配置文件`-`刷新`
+  - 使用托盘右键`服务器`选项切换自定义配置
+- 在软件关闭状态下 ，可手动编辑  `settings.json`文件进行参数调整，
 
-Delete `settings.json` in the same folder as `V2RayW.exe`.
 
-## Disclaimer
-
-The developer does not major in CS nor Software Engineer and currently is busy with grad school courses. So V2rayW will not be updated frequently. The developer may not have enough time to add more features to V2RayW, nor to merge pull requests. However, forking and releasing your own version are always welcome.
 
