@@ -342,9 +342,6 @@
   <data name="resetall" xml:space="preserve">
     <value>全部重置</value>
   </data>
-  <data name="seeexample" xml:space="preserve">
-    <value>查看样例</value>
-  </data>
   <data name="TLSallowInsecure" xml:space="preserve">
     <value>允许不安全连接</value>
   </data>
@@ -416,7 +413,7 @@ v2ray-core\geosite.dat</value>
     <value>https://www.v2ray.com/chapter_02/03_routing.html</value>
   </data>
   <data name="tcpHelpPage" xml:space="preserve">
-    <value>https://www.v2ray.com/chapter_02/transport/tcp.html#httpheaderobject</value>
+    <value>https://www.v2ray.com/chapter_02/transport/tcp.html</value>
   </data>
   <data name="transportHelpPage" xml:space="preserve">
     <value>https://www.v2ray.com/chapter_02/05_transport.html</value>
@@ -510,5 +507,20 @@ v2ray-core\geosite.dat</value>
   </data>
   <data name="ShareLegacy" xml:space="preserve">
     <value>分享至剪切板(旧版本)</value>
+  </data>
+  <data name="h2HelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_02/transport/h2.html</value>
+  </data>
+  <data name="kcpHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_02/transport/mkcp.html</value>
+  </data>
+  <data name="quicHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_02/transport/quic.html</value>
+  </data>
+  <data name="tlsHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_02/05_transport.html#tlsobject</value>
+  </data>
+  <data name="websocketHelpPage" xml:space="preserve">
+    <value>https://www.v2ray.com/chapter_02/transport/websocket.html</value>
   </data>
 </root>

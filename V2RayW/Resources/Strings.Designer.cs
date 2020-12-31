@@ -349,6 +349,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 https://www.v2ray.com/chapter_02/transport/h2.html 的本地化字符串。
+        /// </summary>
+        public static string h2HelpPage {
+            get {
+                return ResourceManager.GetString("h2HelpPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Header: 的本地化字符串。
         /// </summary>
         public static string header {
@@ -408,6 +417,15 @@ namespace V2RayW.Resources {
         public static string ImportSubscription {
             get {
                 return ResourceManager.GetString("ImportSubscription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.v2ray.com/chapter_02/transport/mkcp.html 的本地化字符串。
+        /// </summary>
+        public static string kcpHelpPage {
+            get {
+                return ResourceManager.GetString("kcpHelpPage", resourceCulture);
             }
         }
         
@@ -734,6 +752,15 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
+        ///   查找类似 https://www.v2ray.com/chapter_02/transport/quic.html 的本地化字符串。
+        /// </summary>
+        public static string quicHelpPage {
+            get {
+                return ResourceManager.GetString("quicHelpPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 QUIC is now an experiment in V2Ray. It implements IETF specification. As the spec is still being standardized, compatibility can&apos;t be guaranteed. 的本地化字符串。
         /// </summary>
         public static string quicstatement {
@@ -923,15 +950,6 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 See example 的本地化字符串。
-        /// </summary>
-        public static string seeexample {
-            get {
-                return ResourceManager.GetString("seeexample", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   查找类似 Server... 的本地化字符串。
         /// </summary>
         public static string server {
@@ -1031,7 +1049,7 @@ namespace V2RayW.Resources {
         }
         
         /// <summary>
-        ///   查找类似 https://www.v2ray.com/en/configuration/transport/tcp.html#httpheaderobject 的本地化字符串。
+        ///   查找类似 https://www.v2ray.com/en/configuration/transport/tcp.html 的本地化字符串。
         /// </summary>
         public static string tcpHelpPage {
             get {
@@ -1063,6 +1081,15 @@ namespace V2RayW.Resources {
         public static string tlsalpn {
             get {
                 return ResourceManager.GetString("tlsalpn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.v2ray.com/chapter_02/05_transport.html#tlsobject 的本地化字符串。
+        /// </summary>
+        public static string tlsHelpPage {
+            get {
+                return ResourceManager.GetString("tlsHelpPage", resourceCulture);
             }
         }
         
@@ -1216,6 +1243,15 @@ namespace V2RayW.Resources {
         public static string viewconfig {
             get {
                 return ResourceManager.GetString("viewconfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 https://www.v2ray.com/chapter_02/transport/websocket.html 的本地化字符串。
+        /// </summary>
+        public static string websocketHelpPage {
+            get {
+                return ResourceManager.GetString("websocketHelpPage", resourceCulture);
             }
         }
         

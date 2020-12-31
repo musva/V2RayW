@@ -116,11 +116,6 @@ namespace V2RayW
             #endregion
         }
 
-        private void TcpExampleButton_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start(Strings.tcpHelpPage);
-        }
-
         private int ParseNumberFromBox(TextBox box, int defaultValue, int? min, int? max)
         {
             int result;
@@ -242,12 +237,15 @@ namespace V2RayW
 
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            if(mainTabControl.SelectedIndex == mainTabControl.Items.Count - 1)
+            switch (mainTabControl.SelectedIndex)
             {
-                Process.Start(Strings.muxHelpPage);
-            } else
-            {
-                Process.Start(Strings.transportHelpPage);
+                case 0: Process.Start(Strings.kcpHelpPage); break;
+                case 1: Process.Start(Strings.tcpHelpPage); break;
+                case 2: Process.Start(Strings.websocketHelpPage); break;
+                case 3: Process.Start(Strings.h2HelpPage); break;
+                case 4: Process.Start(Strings.quicHelpPage); break;
+                case 5: Process.Start(Strings.tlsHelpPage); break;
+                case 6: Process.Start(Strings.muxHelpPage); break;
             }
         }
 
