@@ -96,7 +96,7 @@ namespace V2RayW
             enableRestore = mainWindow.enableRestore;
             outbounds = new List<Dictionary<string, object>>();
             profiles = new List<Dictionary<string, object>>();
-            cusProfiles = new List<string>();
+            cusProfiles = mainWindow.cusProfiles;
             foreach (Dictionary<string, object> outbound in Utilities.DeepClone(mainWindow.profiles))
             {
                 if (VmessForUI(outbound))
