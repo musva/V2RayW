@@ -59,7 +59,7 @@ namespace V2RayW
         public List<Dictionary<string, object>> routingRuleSets = new List<Dictionary<string, object>> { Utilities.ROUTING_GLOBAL, Utilities.ROUTING_DIRECT, Utilities.ROUTING_BYPASSCN_PRIVATE_APPLE };
 
         private FileSystemWatcher pacFileWatcher;
-
+        
         
         public MainWindow()
         {
@@ -804,20 +804,33 @@ namespace V2RayW
 
         void SpeedTestWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            speedTestSemaphore = new Semaphore(3,3);
-            int tag = 0;
+            v2rayJsonConfigTest = GenerateConfigFileTest(); 
             List<Dictionary<string, object>> allOutbounds = new List<Dictionary<string, object>>(profiles);
             allOutbounds.AddRange(subsOutbounds);
             Debug.WriteLine("task start……");
             List<Task> tasks = new List<Task>();
+            speedTestSemaphore = new Semaphore(10, 10);
+            int tag = 0;
+
+            Process v2rayProcessTest = new Process();
+            v2rayProcessTest.StartInfo.FileName = Utilities.corePath;
+            v2rayProcessTest.StartInfo.Arguments = @" -config http://127.0.0.1:18000/test/config.json";
+#if DEBUG
+            v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
+#else
+                v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+#endif
+            v2rayProcessTest.Start();        
+
             foreach (Dictionary<string, object> outbound in allOutbounds)
             {
                 tag++;
                 speedTestSemaphore.WaitOne();
-                tasks.Add(Task.Run(() => { threadSpeedTest(outbound, tag); }).ContinueWith(task => { speedTestSemaphore.Release(); }));
-                Thread.Sleep(500);
+                tasks.Add(Task.Run(() => { speedTestResultDic.Add(outbound["tag"].ToString(), ExtraUtils.GetHttpStatusTime(SpeedTestUrl, httpPort + tag)); }).ContinueWith(task => { speedTestSemaphore.Release(); }));
+                Thread.Sleep(10);
             }
             Task.WaitAll(tasks.ToArray());
+            v2rayProcessTest.Kill();
             Debug.WriteLine("task done……");
         }
 
@@ -827,30 +840,6 @@ namespace V2RayW
             Dispatcher.Invoke(() => { UpdateServerMenuList(speedTestResultDic); });
             Debug.WriteLine("test done ");
         }
-
-        void threadSpeedTest(Dictionary<string, object> outbound, int tag)
-        {
-            try
-            {
-                Process v2rayProcessTest = new Process();
-                v2rayProcessTest.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
-                v2rayJsonConfigTest = GenerateConfigFileTest(outbound, tag);
-                v2rayProcessTest.StartInfo.Arguments = @" -config http://127.0.0.1:18000/test/config.json";
-#if DEBUG
-                v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Normal;
-#else
-                v2rayProcessTest.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-#endif
-                v2rayProcessTest.Start();
-
-                speedTestResultDic.Add(outbound["tag"].ToString(), ExtraUtils.GetHttpStatusTime(SpeedTestUrl, httpPort + tag));
-                v2rayProcessTest.Kill();
-                Debug.WriteLine("outbonds result : {0} {1}", outbound["tag"].ToString(), speedTestResultDic[outbound["tag"].ToString()]);
-            }
-            catch{}
-
-        }
-
 
         #endregion
 
@@ -920,7 +909,7 @@ namespace V2RayW
         private void InitializeCoreProcess()
         {
             v2rayProcess = new System.Diagnostics.Process();
-            v2rayProcess.StartInfo.FileName = AppDomain.CurrentDomain.BaseDirectory + @"v2ray-core\v2ray.exe";
+            v2rayProcess.StartInfo.FileName = Utilities.corePath;
             Debug.WriteLine(v2rayProcess.StartInfo.FileName);
             v2rayProcess.StartInfo.Arguments = @"-config http://127.0.0.1:18000/config.json";
 #if DEBUG
@@ -1106,43 +1095,49 @@ namespace V2RayW
             return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(fullConfig, Formatting.Indented));
         }
 
-        byte[] GenerateConfigFileTest(Dictionary<string, object> outbound, int tag)
+        byte[] GenerateConfigFileTest()
         {
             Dictionary<string, object> fullConfig = Utilities.configTemplate;
+            List<Dictionary<string, object>> allOutbounds = new List<Dictionary<string, object>>(profiles);
+            allOutbounds.AddRange(subsOutbounds);
             fullConfig["log"] = new Dictionary<string, string>
             {
                 { "loglevel", "none" },
                 { "error", "none" },
-                { "access", "none" },
+                { "access", "none" }
             };
             fullConfig["dns"] = new Dictionary<string, object>
             {
                 { "servers", new List<string> { "8.8.8.8" } }
             };
-            fullConfig["inbounds"] = new List<Dictionary<string, object>>
-            {
-                new Dictionary<string, object>
-                {
-                    { "port", localPort+tag },
-                    { "listen", @"127.0.0.1" },
+            List<Dictionary<string, object>> allInbounds = new List<Dictionary<string, object>>();
+            Dictionary<string, object> allRouting = new Dictionary<string, object>
                     {
-                        "settings",
-                        new Dictionary<string, object> { {"udp", true} }
-                    },
-                    { "protocol", "socks" }
-                },
-                new Dictionary<string, object>
+                        { @"domainStrategy", @"AsIs" }
+                    };
+            List<Dictionary<string, object>> allRule = new List<Dictionary<string, object>>();
+            int tag = 0;
+            foreach (Dictionary<string, object> od in allOutbounds)
+            {
+                tag++;
+                allInbounds.Add(new Dictionary<string, object>
                 {
-                    { "port", httpPort+tag },
+                    { "port", httpPort + tag },
                     { "listen",  @"127.0.0.1" },
-                    { "protocol", "http" }
-                }
-            };
-            fullConfig["outbounds"] = new List<Dictionary<string, object>> { outbound };
-            Dictionary<string, object> routing = Utilities.ROUTING_GLOBAL;
-            Dictionary<string, object> outboundTag = (routing["rules"] as List<object>)[0] as Dictionary<string, object>;
-            outboundTag["outboundTag"] = outbound["tag"];
-            fullConfig["routing"] = routing;
+                    { "protocol", "http" },
+                    { "tag", od["tag"] }
+                });
+                allRule.Add(new Dictionary<string, object>
+                {
+                    { "type", "field" },
+                    { "inboundTag", new List<string> { od["tag"] as string } },
+                    { "outboundTag", od["tag"] },
+                });
+            }
+            allRouting["rules"] = allRule;
+            fullConfig["inbounds"] = allInbounds;
+            fullConfig["outbounds"] = allOutbounds;
+            fullConfig["routing"] = allRouting;
             return Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(fullConfig, Formatting.Indented));
         }
         #endregion

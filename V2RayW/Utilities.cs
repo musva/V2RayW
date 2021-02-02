@@ -107,6 +107,9 @@ namespace V2RayW
         public static Dictionary<string, object> configTemplate = new Dictionary<string, object>
         {
             {
+                "log", new Dictionary<string, object>()
+            },
+            {
                 "dns",
                 new Dictionary<string, object>
                 {
@@ -115,9 +118,6 @@ namespace V2RayW
             },
             {
                 "inbounds", new List<Dictionary<string, object>>()
-            },
-            {
-                "log", new Dictionary<string, object>()
             },
             {
                 "outbounds", new List<Dictionary<string, object>>()
